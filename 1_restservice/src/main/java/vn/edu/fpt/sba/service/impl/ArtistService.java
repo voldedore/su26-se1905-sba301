@@ -1,5 +1,7 @@
 package vn.edu.fpt.sba.service.impl;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import vn.edu.fpt.sba.dto.response.AlbumResponseDTO;
 import vn.edu.fpt.sba.dto.response.ArtistDetailResponseDTO;
@@ -17,8 +19,10 @@ public class ArtistService implements IArtistService {
         this.artistRepository = artistRepository;
     }
     @Override
-    public List<ArtistDetailResponseDTO> findAll() {
-        return artistRepository.findAll().stream().map(this::toDetailResponseDto).toList();
+    public Page<ArtistDetailResponseDTO> findAll(Pageable pageable) {
+        Page<Artist> artist = artistRepository.findAll(pageable);
+        return artist.map(this::toDetailResponseDto);
+
     }
     @Override
     public ArtistDetailResponseDTO findById(Integer id)
