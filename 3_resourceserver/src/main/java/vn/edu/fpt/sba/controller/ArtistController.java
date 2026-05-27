@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import vn.edu.fpt.sba.configuration.GenericConfig;
 import vn.edu.fpt.sba.dto.response.ArtistDetailResponseDTO;
@@ -27,7 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/artists")
+@RequestMapping("/api/v1/artists")
 @Tag(name = "Artist APIs", description = "APIs for managing Artists")
 public class ArtistController {
     private ArtistService artistService;
@@ -37,6 +38,7 @@ public class ArtistController {
     }
 
     @GetMapping("")
+    @PreAuthorize("hasAuthority('SCOPE_artists.read')")
     @ApiResponses({
             @ApiResponse(
                     responseCode = "200",
@@ -65,6 +67,7 @@ public class ArtistController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('SCOPE_artists.read')")
     @Operation(summary = "Get artist by ID", description = "This API will return an artist by its ID")
     @ApiResponses({
             @ApiResponse(
@@ -89,6 +92,7 @@ public class ArtistController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     public Artist createArtist(@RequestBody @Valid ArtistRequestDTO artistRequestDto) {
         Artist artist = new Artist();
@@ -97,6 +101,7 @@ public class ArtistController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('SCOPE_artists.write')")
     public ResponseEntity<Artist> updateArtist(@PathVariable Integer id, @RequestBody Artist artist) {
         Artist updatedArtist = artistService.update(id, artist);
         if (updatedArtist == null) {
@@ -107,6 +112,7 @@ public class ArtistController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('SCOPE_artists.write')")
     public ResponseEntity<Void> deleteArtist(@PathVariable Integer id) {
         artistService.delete(id);
 
