@@ -24,6 +24,7 @@ import vn.edu.fpt.sba.exception.ApiError;
 import vn.edu.fpt.sba.exception.ExampleArtistException;
 import vn.edu.fpt.sba.service.impl.ArtistService;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +39,8 @@ public class ArtistController {
     }
 
     @GetMapping("")
-    @PreAuthorize("hasAuthority('SCOPE_artists.read')")
+//    @PreAuthorize("hasAuthority('SCOPE_artists.read')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'CUSTOMER')")
     @ApiResponses({
             @ApiResponse(
                     responseCode = "200",
@@ -67,7 +69,7 @@ public class ArtistController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('SCOPE_artists.read')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'CUSTOMER')")
     @Operation(summary = "Get artist by ID", description = "This API will return an artist by its ID")
     @ApiResponses({
             @ApiResponse(
@@ -92,9 +94,13 @@ public class ArtistController {
     }
 
     @PostMapping
+    // về mặc định, các authorities (ROLE_ SCOPE_...) chỉ tự động nhận diện các SCOPE
+    // để trích xuất được các thông tin "custom" thêm vào JWT (access_token) vd như ROLE_ADMIN
+    // ta cần định nghĩa 1 JWT converter - customized token -> ROLE_XXXX
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
-    public Artist createArtist(@RequestBody @Valid ArtistRequestDTO artistRequestDto) {
+    public Artist createArtist(@RequestBody @Valid ArtistRequestDTO artistRequestDto, Principal principal) {
+        System.out.println(principal);
         Artist artist = new Artist();
         artist.setName(artistRequestDto.name());
         return artistService.save(artist);
