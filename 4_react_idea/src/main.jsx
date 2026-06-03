@@ -1,0 +1,59 @@
+import React, {StrictMode} from 'react'
+import {createRoot} from 'react-dom/client'
+import 'bootstrap/dist/css/bootstrap.css';
+import {HashRouter} from 'react-router-dom';
+import App from "./App.jsx";
+
+// const objProduct = {
+//     id: 79,
+//     price: 85,
+//     name: 'T-Shirt'
+// };
+//
+// function displayName(product) {
+//     product.id
+// }
+// Array of Objects
+const artistList = [
+    {
+        id: 1,
+        name: 'AC/DC'
+    },
+    {
+        id: 2,
+        name: 'Dan Nguyen'
+    },
+    {
+        id: 3,
+        name: 'Bang Kieu'
+    },
+    {
+        id: 4,
+        name: 'Dan Truong'
+    },
+];
+
+createRoot(document.getElementById('root')).render(
+    <StrictMode>
+        {/*Code giao dien cho trang Artist List*/}
+        {/*(Su dung cac Component cua React-Bootstrap)*/}
+        {/*NavBar*/}
+        <HashRouter>
+            <App />
+        </HashRouter>
+        {/*<Header />*/}
+        {/*<Container>*/}
+        {/*    <h1>*/}
+        {/*        Artist list*/}
+        {/*    </h1>*/}
+        {/*    <ArtistTable list={artistList}/>*/}
+        {/*</Container>*/}
+    </StrictMode>,
+)
+// API endpoint @ Rest service a.k.a resource server: http://localhost:8080/api/v1/artists
+// FE/app react/SPA
+// http://localhost:8888/artists -> artist list ArtistTable
+// http://localhost:8888/artists/new -> create ArtistForm
+
+// 1. node_modules là gì? -> luu ý, xóa đi trước khi nộp bài thi.
+// 2. Tại sao lại tồn tại 2 thư mục để chứa assets (hình ảnh...) là public và src/assets
