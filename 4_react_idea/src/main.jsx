@@ -13,25 +13,7 @@ import App from "./App.jsx";
 // function displayName(product) {
 //     product.id
 // }
-// Array of Objects
-const artistList = [
-    {
-        id: 1,
-        name: 'AC/DC'
-    },
-    {
-        id: 2,
-        name: 'Dan Nguyen'
-    },
-    {
-        id: 3,
-        name: 'Bang Kieu'
-    },
-    {
-        id: 4,
-        name: 'Dan Truong'
-    },
-];
+
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>

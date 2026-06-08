@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/artists")
+@RequestMapping("/api/v1/artists")
 @Tag(name = "Artist APIs", description = "APIs for managing Artists")
 public class ArtistController {
     private ArtistService artistService;

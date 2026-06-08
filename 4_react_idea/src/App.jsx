@@ -7,13 +7,16 @@ import {ArtistForm} from "./components/artists/ArtistForm.jsx";
 
 function App() {
     return (
-        <Header>
-            <Routes>
-                <Route path={'/'} element={<HomePage />}/>
-                <Route path={'/artists'} element={<ArtistList />}/>
-                <Route path={'/artists/new'} element={<ArtistForm />}/>
-            </Routes>
-        </Header>
+        <>
+            <Header/>
+            <main>
+                <Routes>
+                    <Route path={'/'} element={<HomePage/>}/>
+                    <Route path={'/danh-sach-nghe-si'} element={<ArtistList/>}/>
+                    <Route path={'/them-moi-nghe-si'} element={<ArtistForm/>}/>
+                </Routes>
+            </main>
+        </>
     );
 }
 

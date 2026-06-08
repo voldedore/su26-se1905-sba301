@@ -20,8 +20,8 @@ export function Header() {
                 <Navbar.Collapse>
                     <Nav className={"me-auto"}>
                         <NavDropdown title={"Artists"}>
-                            <NavDropdown.Item as={Link} to={'/artists'}>Artists list</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to={'/artists/new'}>Add new</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to={'/danh-sach-nghe-si'}>Artists list</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to={'/them-moi-nghe-si'}>Add new</NavDropdown.Item>
                         </NavDropdown>
                         <NavDropdown title={"Albums"}>
                             <NavDropdown.Item>Albums list</NavDropdown.Item>
