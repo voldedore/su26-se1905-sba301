@@ -27,6 +27,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/v1/artists/**").permitAll()
+                        .requestMatchers("/api/genres/**").permitAll()
+                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll()
                         .anyRequest().authenticated())
 //                .httpBasic(Customizer.withDefaults()) // Bật Http Basic Auth
                 .formLogin(AbstractHttpConfigurer::disable) // Ẩn form login
