@@ -1,12 +1,17 @@
 import {Button, Container, Table} from "react-bootstrap";
 import {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 
 function ArtistTableRow({key, artist}) {
     return (
         <tr key={key}>
             <td>{artist.id}</td>
             <td>{artist.name}</td>
-            <td><Button size="sm">Edit</Button><Button variant="danger" size="sm">Delete</Button></td>
+            <td> {// String interpolate `
+                 }
+                <Button size="sm" as={Link} to={`/chinh-sua-nghe-si/${artist.id}`}>Edit</Button>
+                <Button variant="danger" size="sm">Delete</Button>
+            </td>
         </tr>
     );
 }
