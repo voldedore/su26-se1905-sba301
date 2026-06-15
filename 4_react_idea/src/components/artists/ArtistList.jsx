@@ -10,7 +10,7 @@ function ArtistTableRow({key, artist}) {
             <td> {// String interpolate `
                  }
                 <Button size="sm" as={Link} to={`/chinh-sua-nghe-si/${artist.id}`}>Edit</Button>
-                <Button variant="danger" size="sm">Delete</Button>
+                <Button variant="danger" size="sm" as={Link} to={`/xoa-nghe-si/${artist.id}`}>Delete</Button>
             </td>
         </tr>
     );

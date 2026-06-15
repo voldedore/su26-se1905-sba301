@@ -15,12 +15,12 @@ export function ArtistForm() {
 
     // Edit Mode -> FE form create or edit? -> co ton tai id trong param
     const {id} = useParams();
-    const idEditMode = !!id;
+    const isEditMode = !!id;
 
     // Conditional Fetch API de lay thong tin Artist can edit
     // /api/v1/artists/id
     useEffect(() => {
-        if (idEditMode) {
+        if (isEditMode) {
             fetch(`http://localhost:8080/api/v1/artists/${id}`)
                 .then(res => {
                     if (!res.ok) {
@@ -36,7 +36,7 @@ export function ArtistForm() {
                 })
                 .catch(err => setError(err.message));
         }
-    }, [idEditMode, id]);
+    }, [isEditMode, id]);
 
 
     // Gia lap sleep (wait 2s)
@@ -53,8 +53,24 @@ export function ArtistForm() {
             // Bai tap
             // Viet lai logic de handle case
             /********************  EDIT *********************/
-            if (idEditMode) {
-
+            if (isEditMode) {
+                const res = await fetch(`http://localhost:8080/api/v1/artists/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({name})
+                });
+                if (!res.ok) {
+                    const payload = await res.json();
+                    // Toan tu || (A || B) trong phep assign co nghia A null -> B, A != null -> A
+                    const msg = payload?.message || 'Failed to edit artist';
+                    throw new Error(msg);
+                }
+                if (res.status === 200) {
+                    // redirect ve list
+                    navigate('/danh-sach-nghe-si');
+                }
             } else {
                 /********************  CREATE *******************/
                     // fetch -> DataType la Promise<T>
@@ -99,7 +115,7 @@ export function ArtistForm() {
 
     return (
         <Container>
-            <h1>{idEditMode ? 'Edit artist' : 'Add new artist'}</h1>
+            <h1>{isEditMode ? 'Edit artist' : 'Add new artist'}</h1>
             <Form onSubmit={handleSubmit}>
                 <Form.Label htmlFor="basic-url">Name</Form.Label>
                 <InputGroup className="mb-3">
