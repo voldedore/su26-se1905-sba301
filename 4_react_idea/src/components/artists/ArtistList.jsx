@@ -1,4 +1,4 @@
-import {Button, Container, Table} from "react-bootstrap";
+import {Button, Container, Pagination, Table} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
@@ -8,7 +8,7 @@ function ArtistTableRow({key, artist}) {
             <td>{artist.id}</td>
             <td>{artist.name}</td>
             <td> {// String interpolate `
-                 }
+            }
                 <Button size="sm" as={Link} to={`/chinh-sua-nghe-si/${artist.id}`}>Edit</Button>
                 <Button variant="danger" size="sm" as={Link} to={`/xoa-nghe-si/${artist.id}`}>Delete</Button>
             </td>
@@ -61,27 +61,53 @@ const artistList = [
 ];
 
 export function ArtistList() {
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
     // state artists
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
+    const [size, setSize] = useState(10);
     const [artists, setArtists] = useState([]);
-
+    const renderPaginationItems = () => {
+        let items = [];
+        for (let number = 1; number <= totalPages; number++) {
+            items.push(
+                <Pagination.Item
+                    key={number}
+                    active={number === page}
+                    onClick={() => setPage(number)}
+                >
+                    {number}
+                </Pagination.Item>
+            );
+        }
+        return items;
+    }
     // Call API -> get artist list
     // Inline arrow fn
     useEffect(() => {
         // code
-        fetch('http://localhost:8080/api/v1/artists')
+        fetch(`${API_BASE_URL}/api/v1/artists?page=${page}&size=${size}`)
             .then(res => {
                 return res.json()
             })
             .then(data => {
+                // setPage()
+                // setSize()
                 setArtists(data.content)
+                setTotalPages(data.totalPages);
             })
         // code
-    }, []);
+    }, [API_BASE_URL, page, size]);
 
     return (
         <Container>
             <h1>Artist list</h1>
             <ArtistTable list={artists}/>
+            <Pagination>
+                <Pagination.Prev/>
+                {renderPaginationItems()}
+                <Pagination.Next/>
+            </Pagination>
         </Container>
     );
 }

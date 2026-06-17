@@ -80,12 +80,14 @@ public class ArtistController {
                             schema = @Schema(implementation = ApiError.class))
             )
     })
-    public ArtistDetailResponseDTO getArtistById(@PathVariable Integer id) {
-        // Vi du minh hoa
-        if (id == 79) {
+    public ResponseEntity<ArtistDetailResponseDTO> getArtistById(@PathVariable Integer id) {
+        ArtistDetailResponseDTO responseDTO = artistService.findById(id);
+
+        if (responseDTO == null) {
             throw new ExampleArtistException();
         }
-        return artistService.findById(id);
+
+        return ResponseEntity.ok(responseDTO);
     }
 
     @PostMapping
