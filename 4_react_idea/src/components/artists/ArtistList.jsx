@@ -1,6 +1,25 @@
 import {Button, Container, Pagination, Table} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import axios from "axios";
+import {apiInstance} from "../ApiCore.jsx";
+
+// AXIOS
+
+// 1. What is axios?
+// 2. Installation `npm i axios`
+// 3. Use axios to call APIs (endpoint, body, response...)
+// - GET
+// - POST
+// - PUT
+// - DELETE
+// - ....
+// 4. Replace logic: fetch by axios
+// 5. Comparison Axios vs fetch
+
+
+
+
 
 function ArtistTableRow({key, artist}) {
     return (
@@ -95,9 +114,20 @@ export function ArtistList() {
                 // setSize()
                 setArtists(data.content)
                 setTotalPages(data.totalPages);
-            })
+            });
+
+        await apiInstance.get(`/api/v1/artists?page=${page}&size=${size}`)
+
         // code
     }, [API_BASE_URL, page, size]);
+
+    useEffect(() => {
+        axios.get("http://localhost:8080/api/v1/artists", )
+            .then(response => {
+                console.log(response);
+                console.log(response.data);
+            });
+    }, []);
 
     return (
         <Container>

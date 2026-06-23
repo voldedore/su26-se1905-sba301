@@ -1,3 +1,5 @@
+let contacts = [];
+
 (() => {
     document.querySelectorAll("input").forEach((input) => {
         input.addEventListener("change", (e) => {
@@ -5,7 +7,7 @@
             const id = elm.id;
             const val = elm.value;
             const length = val.length;
-            
+
             const parent = elm.parentElement;
 
             const errElm = document.createElement("span");
@@ -47,4 +49,31 @@
             
     })
 
+    // pseudo code
+    
+    // form.addEventListener("submit", (e) => {
+        // Ngăn hành vi mặc định của form.
+        e.preventDefault();
+        // Lấy giá trị từ các trường input.
+        const name = document.getElementById("name").value;
+        const tel = document.getElementById("tel").value;
+        const address = document.getElementById("address").value;
+        const dob = document.getElementById("dob").value;
+
+        // Tao một đối tượng contact mới với các giá trị từ form.
+        const contact = {
+            name: name,
+            tel: tel,
+            address: address,
+            dob: dob
+        };
+
+        // Push contact mới vào mảng contacts.
+        contacts.push(contact);
+    // });
 })();
+
+
+
+// IIFE - Immediately Invoked Function Expression
+// (// fn ...) ();
