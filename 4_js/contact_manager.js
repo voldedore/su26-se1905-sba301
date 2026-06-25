@@ -50,8 +50,8 @@ let contacts = [];
     })
 
     // pseudo code
-    
-    // form.addEventListener("submit", (e) => {
+
+    function handleFormSubmit(e) {
         // Ngăn hành vi mặc định của form.
         e.preventDefault();
         // Lấy giá trị từ các trường input.
@@ -70,7 +70,22 @@ let contacts = [];
 
         // Push contact mới vào mảng contacts.
         contacts.push(contact);
-    // });
+
+        // renderTable()
+    }
+    
+    form.addEventListener("submit", handleFormSubmit);
+
+    function renderTable() {
+        // psedo cdoe
+        // tableBody = doc.getElementById(idBang)
+        // rows = [];
+        // for contact in contacts:
+            // row = new Element(tr)
+            // row.innerHtml = td.....
+            // rows.push(row)
+        // tableBody.append(rows)
+    }
 })();
 
 
