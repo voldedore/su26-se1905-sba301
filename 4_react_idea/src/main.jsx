@@ -18,7 +18,7 @@ import {AuthProvider} from "./auth/AuthContext.jsx";
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
-        <AuthProvider>
+        {/*<AuthProvider>*/}
             {/*Code giao dien cho trang Artist List*/}
             {/*(Su dung cac Component cua React-Bootstrap)*/}
             {/*NavBar*/}
@@ -32,7 +32,7 @@ createRoot(document.getElementById('root')).render(
             {/*    </h1>*/}
             {/*    <ArtistTable list={artistList}/>*/}
             {/*</Container>*/}
-        </AuthProvider>
+        {/*</AuthProvider>*/}
     </StrictMode>,
 )
 // API endpoint @ Rest service a.k.a resource server: http://localhost:8080/api/v1/artists

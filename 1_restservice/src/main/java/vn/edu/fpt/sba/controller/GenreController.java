@@ -15,8 +15,9 @@ import vn.edu.fpt.sba.entities.Genre;
 import vn.edu.fpt.sba.service.IGenreService;
 
 @RestController
-@RequestMapping("/api/genres")
+@RequestMapping("/api/v1/genres")
 @RequiredArgsConstructor
+// lombok annotation để set mặc định là private final cho các fields
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class GenreController {
 
